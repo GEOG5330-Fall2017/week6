@@ -49,11 +49,55 @@ about water level (`WTE`) in feet. Using the `WTE' data for the year of
 1. please interpolate the wells into a continuous surface of water table
    level using simple kriging method and display the estiamted surface.
    Note that `0` in `WTE2013` means no values for those wells.  
+   
+```{r q21, eval=T, echo=T}
+library('sp')
+library('maptools')
+library('gstat')
+library('raster')
+wells<-readShapePoints('Data/oa.shp')
+wells<-subset(wells,wells$WTE2013>0)
+# explore the data by plotting them out
+plot(wells)
+hist(wells$WTE2013, breaks=20)
+
+# finish the codes for sample variogram and fit the variogram
+
+
+# The following lines create an empty grid that can be used in krige() function
+
+wellsExtent=bbox(wells)
+xy <- expand.grid(seq(wellsExtent[1,1], wellsExtent[1,2],143), seq(wellsExtent[2,1], wellsExtent[2,2],143))
+names(xy) <- c('x','y')
+coordinates(xy)=~x+y
+gridded(xy)=T
+
+
+# Now finish the codes for kriging and plot the prediction out
+
+
+# Plot the interpolated surface using kriging, overlayed by the wells
+
+
+```
+ 
 
 2. please also output the map of variance associated with the estimated
    surface and explain what the variance maps tell us. 
+   
+```{r q22, eval=T, echo=T}
+
+# The output of krige() has two columns, one for prediction, the other for variance. Find the variance and plot it #  out 
+   
+
+```
 
 3. please run a leave-one-out cross-validation, and calcualte the RMSE
    (root-mean-square deviation) of the estimation. 
 
+```{r q22, eval=T, echo=T}
 
+# For the sake of simplicity, you can use krige.cv() function to get the RMSE; see the section of cross-validation # in the codes of the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)
+   
+
+```
