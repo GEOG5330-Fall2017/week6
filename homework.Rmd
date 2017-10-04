@@ -22,14 +22,18 @@ of the simulated results and explain why.
 
 ```{r q1, echo=T, eval=T}
 library(gstat)
+
+# See the section of uncontional simulation in the example codes in the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)
+
 # create a empty grid
 xy <- expand.grid(1:100, 1:100)
 names(xy) <- c('x','y')
 
-# now comment out the following line of codes and make the changes according to the questions. 
+# Now comment out the following line of code and make the changes of the variogram parameters according to the questions. 
 
 # testVgm=vgm(psill=0.025, range=10, model='Gau', nugget=0.0001)
 
+# The following codes are used to run stochastic simulation based on the specified variogram
 g.dummy <- gstat(formula=z~1, locations=~x+y, dummy=T, beta=1, model=testVgm, nmax=21) 
 yy <- predict(g.dummy, newdata=xy, nsim=4)
 coordinates(yy)=~x+y
