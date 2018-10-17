@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Week 4: Homework\"\noutput: github_document\n---\n\n```{r global_options, echo=FALSE, results='asis'}\nknitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',  warning=FALSE, message=FALSE)\nrm(list=ls())\n```\n# Question 1\n\nOn a 100x100 raster grid, please generate a set of (10 per set)\nunconditional simulation maps for each of the following sets of variogram\nparameters:\n\n1. sill= 0.5, range = 5, nugget = 0.0001, model = Exponential \n2. sill= 0.5, range = 5, nugget = 0.0001, model = Gaussian \n3. sill= 0.5, range = 50, nugget = 0.0001, model = Exponential \n\nBased on what you generated, please describe the major visual differences\nof the simulated results and explain why. \n\n```{r q1, echo=T, eval=T}\nlibrary(gstat)\n\n# See the section of uncontional simulation in the example codes in the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)\n\n# create a empty grid\nxy <- expand.grid(1:100, 1:100)\nnames(xy) <- c('x','y')\n\n# Now comment out the following line of code and make the changes of the variogram parameters according to the questions. \n\n# testVgm=vgm(psill=0.025, range=10, model='Gau', nugget=0.0001)\n\n# The following codes are used to run stochastic simulation based on the specified variogram\ng.dummy <- gstat(formula=z~1, locations=~x+y, dummy=T, beta=1, model=testVgm, nmax=21) \nyy <- predict(g.dummy, newdata=xy, nsim=4)\ncoordinates(yy)=~x+y\ngridded(yy) =TRUE\nspplot(yy)\n\n# Now, please comment on the differences of the different variogram models:\n\n```\n\n# Question 2\n\nThe `oa.shp` in the `Data` folder is a set of wells containing information\nabout water level (`WTE`) in feet. Using the `WTE' data for the year of\n2013 (field `WTE2013`), please finish the following questions:\n\n1. please interpolate the wells into a continuous surface of water table\n   level using simple kriging method and display the estiamted surface.\n   Note that `0` in `WTE2013` means no values for those wells.  \n   \n```{r q21, eval=T, echo=T}\nlibrary('sp')\nlibrary('maptools')\nlibrary('gstat')\nlibrary('raster')\nwells<-readShapePoints('Data/oa.shp')\nwells<-subset(wells,wells$WTE2013>0)\n# explore the data by plotting them out\nplot(wells)\nhist(wells$WTE2013, breaks=20)\n\n# finish the codes for sample variogram and fit the variogram\n\n\n# The following lines create an empty grid that can be used in krige() function\n\nwellsExtent=bbox(wells)\nxy <- expand.grid(seq(wellsExtent[1,1], wellsExtent[1,2],143), seq(wellsExtent[2,1], wellsExtent[2,2],143))\nnames(xy) <- c('x','y')\ncoordinates(xy)=~x+y\ngridded(xy)=T\n\n\n# Now finish the codes for kriging and plot the prediction out\n\n\n# Plot the interpolated surface using kriging, overlayed by the wells\n\n\n```\n \n\n2. please also output the map of variance associated with the estimated\n   surface and explain what the variance maps tell us. \n   \n```{r q22, eval=T, echo=T}\n\n# The output of krige() has two columns, one for prediction, the other for variance. Find the variance and plot it #  out \n   \n\n```\n\n3. please run a leave-one-out cross-validation, and calcualte the RMSE\n   (root-mean-square deviation) of the estimation. \n\n```{r q22, eval=T, echo=T}\n\n# For the sake of simplicity, you can use krige.cv() function to get the RMSE; see the section of cross-validation # in the codes of the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)\n   \n\n```",
+    "created" : 1507096669549.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "928891358",
+    "id" : "D105C73B",
+    "lastKnownWriteTime" : 1507097301,
+    "last_content_update" : 1507097301767,
+    "path" : "~/Git/hub/geog5330-homework/week6/homework.Rmd",
+    "project_path" : "homework.Rmd",
+    "properties" : {
+        "marks" : "<:44,2\n>:44,3"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

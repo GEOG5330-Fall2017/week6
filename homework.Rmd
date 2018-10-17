@@ -1,5 +1,5 @@
 ---
-title: "Week 4: Homework"
+title: "Week 8: Homework"
 output: github_document
 ---
 
@@ -23,7 +23,7 @@ of the simulated results and explain why.
 ```{r q1, echo=T, eval=T}
 library(gstat)
 
-# See the section of uncontional simulation in the example codes in the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)
+# See the section of uncontional simulation in the example codes in the lecture (https://github.com/surfcao/geog5330-fall2018/blob/master/week6/codes/kriging.Rmd)
 
 # create a empty grid
 xy <- expand.grid(1:100, 1:100)
@@ -101,7 +101,7 @@ gridded(xy)=T
 
 ```{r q22, eval=T, echo=T}
 
-# For the sake of simplicity, you can use krige.cv() function to get the RMSE; see the section of cross-validation # in the codes of the lecture (https://github.com/surfcao/geog5330-fall2017/blob/master/week6/kriging.Rmd)
+# For the sake of simplicity, you can use krige.cv() function to get the RMSE; see the section of cross-validation # in the codes of the lecture 
    
 
 ```
