@@ -1,4 +1,0 @@
-"0","krigeResult=krige(WTE2013~1, wells, xy,model=fitVgm)
-"
-"1","[using ordinary kriging]
-"
